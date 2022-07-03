@@ -45,7 +45,26 @@ const Header = () => {
                     <div className="left-content">
                         <ul>
                             <li>Khuyến mãi</li>
-                            <li>Piazza</li>
+                            <li className="has-sublist">
+                                <span>Pizza</span>
+                                <div className="dropdown">
+                                    <div className="dropdown-menu">
+                                        <span>Công thức đặc biệt</span>
+                                    </div>
+                                    <div className="dropdown-menu">
+                                        <span>Hải sản cao cấp</span>
+                                    </div>
+                                    <div className="dropdown-menu">
+                                        <span>Thập cẩm cao cấp</span>
+                                    </div>
+                                    <div className="dropdown-menu">
+                                        <span>Truyền thống cao cấp</span>
+                                    </div>
+                                    <div className="dropdown-menu">
+                                        <span>Nhân nhồi</span>
+                                    </div>
+                                </div>
+                            </li>
                             <li>Khai vị</li>
                             <li>Mì ý</li>
                             <li>Nui bỏ lò</li>

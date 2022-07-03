@@ -112,11 +112,64 @@ export const HeaderBot = styled.div`
             padding: 0;
             font-weight: bold;
             color: var(--white);
+
             li {
                 cursor: pointer;
+                padding: 0px 17px;
             }
-            li + li {
-                padding-left: 35px;
+
+            .has-sublist {
+                position: relative;
+                /* padding-left: 35px; */
+
+                margin-bottom: 0;
+                .dropdown {
+                    position: absolute;
+                    top: 35px;
+                    left: 0;
+                    background-color: #005226;
+                    border-bottom-left-radius: 17px;
+                    border-bottom-right-radius: 17px;
+                    text-transform: capitalize;
+                    transition-delay: 0.1s;
+                    visibility: hidden;
+                    opacity: 0;
+                }
+                .dropdown-menu {
+                    width: 220px;
+                    font-size: 1.1rem;
+                    font-weight: 400;
+                    padding: 13px 15px;
+                }
+
+                .dropdown-menu:hover {
+                    background-color: #006a31;
+                }
+                .dropdown-menu:hover:last-child {
+                    border-bottom-left-radius: 17px;
+                    border-bottom-right-radius: 17px;
+                }
+            }
+            .has-sublist:hover > .dropdown {
+                visibility: visible;
+                opacity: 1;
+                transition-delay: 0s;
+            }
+            .has-sublist:hover {
+                border-top-left-radius: 17px;
+                border-top-right-radius: 17px;
+                background-color: #005226;
+            }
+            .has-sublist:hover::before {
+                content: "";
+                width: 100%;
+                height: 15px;
+                background: #005226;
+                position: absolute;
+                bottom: -16px;
+                left: 0;
+                z-index: 0;
+                pointer-events: none;
             }
         }
     }
