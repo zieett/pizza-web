@@ -6,14 +6,15 @@ export const Wrapper = styled.div`
     position: fixed;
     width: 100%;
     top: 0;
-    margin: 13px 0px;
     font-size: var(--fontSmall);
     display: block;
+    z-index: 999;
 `;
 
 export const Content = styled.div`
     max-width: var(--maxWidth);
     margin: 0 auto;
+    padding-bottom: 20px;
 `;
 
 export const HeaderTop = styled.div`
@@ -103,11 +104,10 @@ export const HeaderBot = styled.div`
     border-radius: 30px;
     font-size: var(--fontSmall);
     .left-content {
-        padding: 0 20px;
         ul {
             display: flex;
             list-style-type: none;
-            align-items: center;
+            /* align-items: center; */
             justify-content: space-between;
             padding: 0;
             font-weight: bold;
@@ -177,11 +177,33 @@ export const HeaderBot = styled.div`
         padding-right: 10px;
         display: flex;
         align-items: center;
+        position: relative;
         & > * {
             padding: 0 10px;
         }
-        .search-box {
+        .search-icon {
             cursor: pointer;
+            position: relative;
+            background: unset;
+            border: unset;
+            width: fit-content;
+        }
+        .active {
+            display: block !important;
+        }
+        .search-bar {
+            position: absolute;
+            top: 48px;
+            right: 120px;
+            display: none;
+            input {
+                border-radius: 20px;
+                border-color: #00b041;
+                outline: none;
+                width: 300px;
+                padding: 8px 25px 8px 20px;
+                font-size: 1.05rem;
+            }
         }
 
         .cart {

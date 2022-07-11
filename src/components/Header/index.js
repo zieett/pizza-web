@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { HeaderBot, HeaderTop, Wrapper, Content } from "./Header.styles";
 import logo from "../../images/logo.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Header = () => {
+    const [shippingText, setShippingText] = useState({
+        text: "Nhập địa chỉ của bạn",
+        icon: "location-dot",
+    });
+    let active = useRef();
+
+    const handleSearchIconClick = (e) => {
+        active.current.classList.toggle("active");
+    };
+
     return (
         <Wrapper>
             <Content>
@@ -12,15 +22,33 @@ const Header = () => {
                     <div className="mid">
                         <div className="shipping">
                             <div className="form-radio">
-                                <input type="radio" id="order-delivery" name="ship" checked />
-                                <label for="order-delivery">
+                                <input
+                                    type="radio"
+                                    id="order-delivery"
+                                    name="ship"
+                                    defaultChecked={true}
+                                    onChange={() =>
+                                        setShippingText({
+                                            text: "Nhập địa chỉ của bạn",
+                                            icon: "location-dot",
+                                        })
+                                    }
+                                />
+                                <label htmlFor="order-delivery">
                                     <FontAwesomeIcon icon={["fas", "truck"]} />
                                     <span> Đặt giao hàng</span>
                                 </label>
                             </div>
                             <div className="form-radio">
-                                <input type="radio" id="take-away" name="ship" />
-                                <label for="take-away">
+                                <input
+                                    type="radio"
+                                    id="take-away"
+                                    name="ship"
+                                    onChange={() =>
+                                        setShippingText({ text: "Nhập cửa hàng", icon: "house" })
+                                    }
+                                />
+                                <label htmlFor="take-away">
                                     <FontAwesomeIcon icon={["fas", "box"]} />
                                     <span>Đặt lấy hàng</span>
                                 </label>
@@ -28,10 +56,10 @@ const Header = () => {
                         </div>
                         <div className="search-address">
                             <FontAwesomeIcon
-                                icon={["fas", "location-dot"]}
+                                icon={["fas", shippingText.icon]}
                                 className="search-icon"
                             />
-                            <input placeholder="Nhập địa chỉ của bạn" />
+                            <input placeholder={shippingText.text} />
                         </div>
                     </div>
                     <div className="login">
@@ -75,10 +103,26 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className="right-content">
-                        <div className="search-box">
+                        <button className="search-icon" onClick={handleSearchIconClick}>
                             <FontAwesomeIcon
                                 style={{
                                     color: "white",
+                                    width: "30px",
+                                    height: "20px",
+                                }}
+                                icon={["fas", "magnifying-glass"]}
+                                className="btn"
+                            ></FontAwesomeIcon>
+                        </button>
+                        <div className="search-bar" ref={active}>
+                            <input placeholder="Tim kiem san pham"></input>
+                            <FontAwesomeIcon
+                                style={{
+                                    color: "#00b041",
+                                    position: "absolute",
+                                    right: "20px",
+                                    top: "12px",
+                                    cursor: "pointer",
                                 }}
                                 icon={["fas", "magnifying-glass"]}
                             ></FontAwesomeIcon>

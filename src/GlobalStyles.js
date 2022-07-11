@@ -23,12 +23,15 @@ export const GlobalStyle = createGlobalStyle`
         h1{
             font-size: 2rem;
             font-weight: 600;
-            color: var(--white)
+        }
+        h2{
+            font-size: 1.2rem;
         }
         h3 {
             font-size: 1.1rem;
             font-weight: 600;
         }
+       
         p{
             font-size:1rem;
             color: var(---white)
