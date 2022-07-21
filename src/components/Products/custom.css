@@ -1,0 +1,111 @@
+.Modal {
+    position: absolute;
+    top: calc(20vh);
+    left: calc(25vw);
+    bottom: calc(18vh);
+    /* min-height: fit-content; */
+    min-width: 1020px;
+    border: 1px solid rgb(204, 204, 204);
+    background-color: rgba(255, 255, 255, 1);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+    z-index: 9999;
+    padding: 0;
+    border-radius: 20px;
+}
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(68, 68, 68, 0.95);
+    z-index: 9999;
+}
+.modal-wrapper {
+    height: 580px;
+    min-width: fit-content;
+    height: 100%;
+}
+.modal-left-content {
+    float: left;
+}
+.modal-img {
+    box-sizing: content-box !important;
+    width: 450px;
+    height: 450px;
+    padding: 70px 30px 0px;
+}
+
+.modal-right-content {
+    float: left;
+}
+.modal-price {
+    width: 100%;
+}
+.modal-price p {
+    padding: 0;
+    margin: 0px 0px 20px 0px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #d30e15;
+}
+.modal-right-content {
+    height: 100% !important;
+    width: 520px;
+}
+.modal-right-content-wrapper {
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.right-content-top {
+    background-color: #fafafa;
+    margin-top: 10px;
+    padding: 20px 20px 60px 20px;
+    border-radius: 20px;
+}
+.modal-description h2 {
+    font-weight: 300;
+}
+.modal-note {
+    margin: 10px;
+}
+.modal-note h3 {
+    color: #006a31;
+}
+.modal-note input {
+    width: 100%;
+    padding: 20px 30px 30px 30px;
+    outline: none;
+    font-size: 1.1rem;
+}
+.right-content-bottom {
+    width: 85%;
+    text-align: center;
+    background-color: #007d43;
+    border-radius: 10px;
+    margin: 15px auto;
+}
+.right-content-bottom h3 {
+    padding: 10px;
+    color: white;
+    font-size: 1.2rem;
+    margin: 0;
+}
+.modal-title h1 {
+    position: relative;
+}
+.modal-title h1::before {
+    position: absolute;
+    content: "";
+    width: 26px;
+    height: 3px;
+    top: 0;
+    left: 0;
+    background-color: #006a31;
+}

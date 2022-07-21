@@ -19,6 +19,7 @@ export const Wrapper = styled.div`
         font-size: 2.2rem;
         padding: 15px 0;
         font-weight: bold;
+        margin-top: 20px;
     }
     .main-title::before {
         position: absolute;
@@ -32,7 +33,7 @@ export const Wrapper = styled.div`
     .loading-more-button {
         width: 100%;
         padding: 5px 0;
-        margin: 20px 0;
+        margin: 20px 0px 0px 0px;
         font-size: 1.1rem;
         cursor: pointer;
         font-weight: 500;

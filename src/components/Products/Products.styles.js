@@ -4,17 +4,16 @@ export const Wrapper = styled.div`
     /* &:not(:last-child) {
         margin-right: 15px;
     } */
-    & + & {
-        margin-left: 30px;
+
+    & {
+        margin-right: 30px;
     }
     &:hover {
         color: #006a31;
     }
     .image {
-        margin: 0 auto;
+        margin: 20px auto;
         cursor: pointer;
-        width: 310px;
-        height: 310px;
     }
     @keyframes rotation {
         from {
@@ -26,6 +25,7 @@ export const Wrapper = styled.div`
     }
     .image:hover {
         animation: rotation 0.2s linear forwards;
+        overflow: hidden;
     }
     .title {
         font-weight: bolder;
@@ -44,6 +44,7 @@ export const Wrapper = styled.div`
         align-items: center;
         justify-content: space-between;
         color: black;
+
         .left-content-price {
             font-size: 1.4rem;
             font-weight: bold;
@@ -60,6 +61,10 @@ export const Wrapper = styled.div`
             cursor: pointer;
             & > * {
                 margin: 0 7px;
+            }
+            &:hover {
+                background: red;
+                color: white;
             }
         }
     }
