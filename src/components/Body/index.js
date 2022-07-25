@@ -2,32 +2,16 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import Grid from "../Grid";
 import SaleProducts from "../SaleProducts";
 import Menu from "../Menu";
+import { Outlet } from "react-router-dom";
 
 import axios from "axios";
+import Sliders from "../Slider";
 
-const Body = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const fetchData = async () => {
-        await axios
-            .get("http://localhost:3001/products", {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                },
-            })
-            .then(function (response) {
-                setData(response.data.products);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-    useEffect(() => {
-        fetchData();
-    }, []);
+const Body = ({ data, loading }) => {
     return (
         <>
+            <Sliders></Sliders>
+
             <SaleProducts></SaleProducts>
             {!loading && (
                 <>

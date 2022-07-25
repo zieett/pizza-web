@@ -16,6 +16,10 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Nunito', sans-serif;
     }
+    html{
+        scroll-behavior: smooth;
+      
+    }
     body{
         margin:0;
         padding:0;
@@ -37,4 +41,5 @@ export const GlobalStyle = createGlobalStyle`
             color: var(---white)
         }
     }
+    
 `;

@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Wrapper } from "./Products.styles";
 import { convertMoney } from "../../helpers";
 import ReactModal from "react-modal";
 import "./custom.css";
+import { Context } from "../../context";
 const Products = ({ data }) => {
     const [showModal, setShowModal] = useState(false);
     const handleModal = () => {
@@ -12,6 +13,17 @@ const Products = ({ data }) => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+    const handleShowModal = () => {
+        setShowModal(true);
+    };
+    const handleAddToCart = () => {
+        let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+        sessionStorage.setItem("cart", JSON.stringify([...cart, data]));
+        handleCloseModal();
+        setCartNum(cartNum + 1);
+    };
+    const [cartNum, setCartNum] = useContext(Context);
+
     return (
         <Wrapper>
             <div>
@@ -23,7 +35,7 @@ const Products = ({ data }) => {
                         <div className="left-content-title">Gia chi tu</div>
                         <div className="left-content-price">{convertMoney(data.price)}</div>
                     </div>
-                    <div className="right-content">
+                    <div className="right-content" onClick={handleShowModal}>
                         <span>Mua ngay</span>
                         <FontAwesomeIcon
                             icon={["fas", "arrow-right"]}
@@ -63,8 +75,8 @@ const Products = ({ data }) => {
                                     <input type="text" placeholder="Nhập ghi chú của bạn tại đây" />
                                 </div>
                             </div>
-                            <div className="right-content-bottom">
-                                <h3>Them vao gio hang</h3>
+                            <div className="right-content-bottom" onClick={handleAddToCart}>
+                                <h3>Thêm vào giở hàng</h3>
                             </div>
                         </div>
                     </div>

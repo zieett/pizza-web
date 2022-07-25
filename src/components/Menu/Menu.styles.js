@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
         font-weight: bold;
         margin-top: 20px;
     }
-    .main-title::before {
+    .main-title-before::before {
         position: absolute;
         content: "";
         width: 26px;
@@ -45,6 +45,18 @@ export const Wrapper = styled.div`
         border: none;
         :hover {
             background-color: #e8f5ee;
+            color: #006a31;
+        }
+    }
+    .detail-menu-header {
+        position: relative;
+        width: 100%;
+        border-bottom: 1px solid lightgrey;
+        div {
+            padding-left: 12px;
+            font-size: 1.8rem;
+        }
+        div:hover {
             color: #006a31;
         }
     }

@@ -1,24 +1,53 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { HeaderBot, HeaderTop, Wrapper, Content } from "./Header.styles";
 import logo from "../../images/logo.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { Context } from "../../context";
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: white;
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
+`;
 const Header = () => {
     const [shippingText, setShippingText] = useState({
         text: "Nhập địa chỉ của bạn",
         icon: "location-dot",
     });
+    const [cartNum, setCartNum, cartData, setCartData] = useContext(Context);
     let active = useRef();
+    let navigate = useNavigate();
 
+    useEffect(() => {
+        setCartData(JSON.parse(sessionStorage.getItem("cart") || 0) || []);
+    }, [cartNum, setCartData]);
     const handleSearchIconClick = (e) => {
         active.current.classList.toggle("active");
+    };
+    const handleCartClick = () => {
+        navigate("/cart");
+    };
+    const handleRemoveFromCart = (value) => {
+        var newData = cartData.filter((item) => item.name !== value.name);
+        sessionStorage.setItem("cart", JSON.stringify(newData));
+        setCartData(newData);
+        setCartNum(cartNum - 1);
     };
 
     return (
         <Wrapper>
             <Content>
                 <HeaderTop>
-                    <img src={logo} alt="logo" />
+                    <StyledLink to="/">
+                        <img src={logo} alt="logo" />
+                    </StyledLink>
                     <div className="mid">
                         <div className="shipping">
                             <div className="form-radio">
@@ -74,7 +103,9 @@ const Header = () => {
                         <ul>
                             <li>Khuyến mãi</li>
                             <li className="has-sublist">
-                                <span>Pizza</span>
+                                <StyledLink to="/pizza">
+                                    <span>Pizza</span>
+                                </StyledLink>
                                 <div className="dropdown">
                                     <div className="dropdown-menu">
                                         <span>Công thức đặc biệt</span>
@@ -93,13 +124,27 @@ const Header = () => {
                                     </div>
                                 </div>
                             </li>
-                            <li>Khai vị</li>
-                            <li>Mì ý</li>
-                            <li>Nui bỏ lò</li>
-                            <li>Salad</li>
-                            <li>Tráng miệng</li>
-                            <li>Thức uống</li>
-                            <li>Kem hộp</li>
+                            <StyledLink to="appetizer">
+                                <li>Khai vị</li>
+                            </StyledLink>
+                            <StyledLink to="spaghetti">
+                                <li>Mì ý</li>
+                            </StyledLink>
+                            <StyledLink to="macaroni">
+                                <li>Nui bỏ lò</li>
+                            </StyledLink>
+                            <StyledLink to="salad">
+                                <li>Salad</li>
+                            </StyledLink>
+                            <StyledLink to="dessert">
+                                <li>Tráng miệng</li>
+                            </StyledLink>
+                            <StyledLink to="beverage">
+                                <li>Thức uống</li>
+                            </StyledLink>
+                            <StyledLink to="iceCream">
+                                <li>Kem hộp</li>
+                            </StyledLink>
                         </ul>
                     </div>
                     <div className="right-content">
@@ -129,8 +174,62 @@ const Header = () => {
                         </div>
                         <div className="cart">
                             <FontAwesomeIcon icon={["fas", "cart-shopping"]}></FontAwesomeIcon>
-                            <span>Giỏ hàng</span>
-                            <span>0</span>
+                            <span className="text" onClick={handleCartClick}>
+                                Giỏ hàng
+                            </span>
+                            <span className="number">{cartNum}</span>
+                            <div className="cart-mini">
+                                {cartNum === 0 ? (
+                                    <div className="cart-mini-wrapper">
+                                        <h2>Rất tiếc!!!, bạn không có sản phẩm ở đây</h2>
+                                        <p>
+                                            Chúng tôi sẽ giao hàng với hóa đơn trên{" "}
+                                            <span>100,000 đ</span>
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="cart-mini-wrapper">
+                                        {cartData.map((value, index) => {
+                                            return (
+                                                <div className="cart-item" key={index}>
+                                                    <div className="cart-mini-wrapper-top">
+                                                        <img
+                                                            src={value.image}
+                                                            className="cart-mini-wrapper-image"
+                                                            alt=""
+                                                        ></img>
+                                                        <div className="cart-mini-wrapper-detail">
+                                                            <div className="top">
+                                                                <div>
+                                                                    <span>{value.name}</span>
+                                                                    <FontAwesomeIcon
+                                                                        icon={["fas", "trash"]}
+                                                                        className="trash"
+                                                                        onClick={() => {
+                                                                            return handleRemoveFromCart(
+                                                                                value
+                                                                            );
+                                                                        }}
+                                                                    ></FontAwesomeIcon>
+                                                                </div>
+                                                            </div>
+                                                            <div className="bot">
+                                                                <h3 className="amount">
+                                                                    Số lượng: 1
+                                                                </h3>
+                                                                <h3 className="cart-price">
+                                                                    {value.price}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="cart-mini-wrapper-bot"></div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </HeaderBot>

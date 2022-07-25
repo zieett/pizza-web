@@ -90,6 +90,7 @@
     background-color: #007d43;
     border-radius: 10px;
     margin: 15px auto;
+    cursor: pointer;
 }
 .right-content-bottom h3 {
     padding: 10px;

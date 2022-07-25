@@ -12,9 +12,11 @@ import {
     faCircleLeft,
     faCircleRight,
     faArrowRight,
+    faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faYoutube } from "@fortawesome/free-brands-svg-icons";
 library.add(
+    faTrash,
     faBox,
     faTruck,
     faLocationDot,

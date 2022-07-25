@@ -65,6 +65,7 @@ export const Wrapper = styled.div`
             &:hover {
                 background: red;
                 color: white;
+                border: none;
             }
         }
     }

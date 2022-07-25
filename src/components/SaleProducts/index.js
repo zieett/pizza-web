@@ -34,7 +34,6 @@ function CustomArrow(props) {
     return <div className={className} onClick={onClick}></div>;
 }
 const SaleProducts = () => {
-    console.log(data);
     const settings = {
         dots: false,
         infinite: true,
