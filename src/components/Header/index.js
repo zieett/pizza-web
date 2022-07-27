@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../../context";
+import { groupBy, convertMoney } from "../../helpers";
 const StyledLink = styled(Link)`
     text-decoration: none;
     color: white;
@@ -21,13 +22,13 @@ const Header = () => {
         text: "Nhập địa chỉ của bạn",
         icon: "location-dot",
     });
-    const [cartNum, setCartNum, cartData, setCartData] = useContext(Context);
+    const [cartNum, setCartNum, cartData, setCartData, cartDataGroup, setCartDataGroup] =
+        useContext(Context);
     let active = useRef();
     let navigate = useNavigate();
-
     useEffect(() => {
-        setCartData(JSON.parse(sessionStorage.getItem("cart") || 0) || []);
-    }, [cartNum, setCartData]);
+        setCartDataGroup(Object.values(groupBy(cartData, "name")) || []);
+    }, [cartData, setCartDataGroup]);
     const handleSearchIconClick = (e) => {
         active.current.classList.toggle("active");
     };
@@ -35,12 +36,17 @@ const Header = () => {
         navigate("/cart");
     };
     const handleRemoveFromCart = (value) => {
-        var newData = cartData.filter((item) => item.name !== value.name);
+        var numberOfValue = 0;
+        var newData = cartData.filter((item) => {
+            if (item.name === value.name) {
+                numberOfValue++;
+            }
+            return item.name !== value.name;
+        });
         sessionStorage.setItem("cart", JSON.stringify(newData));
         setCartData(newData);
-        setCartNum(cartNum - 1);
+        setCartNum(cartNum - numberOfValue);
     };
-
     return (
         <Wrapper>
             <Content>
@@ -189,25 +195,25 @@ const Header = () => {
                                     </div>
                                 ) : (
                                     <div className="cart-mini-wrapper">
-                                        {cartData.map((value, index) => {
+                                        {cartDataGroup.map((value, index) => {
                                             return (
                                                 <div className="cart-item" key={index}>
                                                     <div className="cart-mini-wrapper-top">
                                                         <img
-                                                            src={value.image}
+                                                            src={value[0].image}
                                                             className="cart-mini-wrapper-image"
                                                             alt=""
                                                         ></img>
                                                         <div className="cart-mini-wrapper-detail">
                                                             <div className="top">
                                                                 <div>
-                                                                    <span>{value.name}</span>
+                                                                    <span>{value[0].name}</span>
                                                                     <FontAwesomeIcon
                                                                         icon={["fas", "trash"]}
                                                                         className="trash"
                                                                         onClick={() => {
                                                                             return handleRemoveFromCart(
-                                                                                value
+                                                                                value[0]
                                                                             );
                                                                         }}
                                                                     ></FontAwesomeIcon>
@@ -215,18 +221,40 @@ const Header = () => {
                                                             </div>
                                                             <div className="bot">
                                                                 <h3 className="amount">
-                                                                    Số lượng: 1
+                                                                    Số lượng:{" "}
+                                                                    <span>{value.length}</span>
                                                                 </h3>
                                                                 <h3 className="cart-price">
-                                                                    {value.price}
+                                                                    {convertMoney(
+                                                                        value[0].price *
+                                                                            value.length
+                                                                    )}
                                                                 </h3>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="cart-mini-wrapper-bot"></div>
                                                 </div>
                                             );
                                         })}
+                                        <div className="cart-mini-wrapper-bot">
+                                            <div className="total-price-wrapper">
+                                                <span>Tổng tiền</span>
+                                                <span className="total-price">
+                                                    {convertMoney(
+                                                        cartData.reduce(
+                                                            (total, value) => total + value.price,
+                                                            0
+                                                        )
+                                                    )}
+                                                </span>
+                                            </div>
+                                            <div
+                                                className="payment"
+                                                onClick={() => navigate("/cart")}
+                                            >
+                                                <span>Thanh toán</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </div>

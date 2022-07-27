@@ -4,6 +4,7 @@ import { Context } from "../../context.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertMoney, groupBy } from "../../helpers.js";
 import { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ProductsTotalPrice = ({ value }) => {
     const [totalPrice, setTotalPrice] = useState(
@@ -22,16 +23,17 @@ const ProductsTotalPrice = ({ value }) => {
 };
 
 const Cart = () => {
-    const [cartNum, setCartNum, cartData, setCartData] = useContext(Context);
-    const [data, setData] = useState(Object.values(groupBy(cartData, "name")));
+    const [cartNum, setCartNum, cartData, setCartData, cartDataGroup, setCartDataGroup] =
+        useContext(Context);
     const handlePlus = (value) => {
         sessionStorage.setItem("cart", JSON.stringify([...cartData, value]));
         setCartData([...cartData, value]);
         setCartNum(cartNum + 1);
     };
+    const navigate = useNavigate();
     const handleMinus = (value) => {
         var newData;
-        for (var i = 0; i < cartData.length; i++) {
+        for (var i = cartData.length - 1; i > -1; i--) {
             if (cartData[i].name === value.name) {
                 cartData.splice(i, 1);
                 newData = cartData;
@@ -55,8 +57,9 @@ const Cart = () => {
         setCartNum(cartNum - numberOfValue);
     };
     useEffect(() => {
-        setData(Object.values(groupBy(cartData, "name")));
-    }, [cartData]);
+        setCartDataGroup(Object.values(groupBy(cartData, "name")));
+        console.log("helelo123");
+    }, [cartData, setCartDataGroup, cartNum]);
     return (
         <Wrapper>
             <Content>
@@ -64,7 +67,7 @@ const Cart = () => {
                     <>
                         <h1>Sản phẩm</h1>
                         <div className="product-wrapper">
-                            {data.map((value, index) => {
+                            {cartDataGroup.map((value, index) => {
                                 return (
                                     <div className="product" key={index}>
                                         <div className="left">
@@ -91,15 +94,7 @@ const Cart = () => {
                                                 >
                                                     -
                                                 </button>
-                                                <input
-                                                    type="text"
-                                                    value={
-                                                        cartData.filter(
-                                                            (item) => value[0].name === item.name
-                                                        ).length
-                                                    }
-                                                    readOnly
-                                                />
+                                                <input type="text" value={value.length} readOnly />
                                                 <button
                                                     className="plus"
                                                     onClick={() => {
@@ -123,6 +118,30 @@ const Cart = () => {
                                     </div>
                                 );
                             })}
+                        </div>
+                        <div className="total-price">
+                            Tổng tiền:{" "}
+                            <span>
+                                {convertMoney(
+                                    cartData.reduce((total, value) => total + value.price, 0)
+                                )}
+                            </span>
+                        </div>
+                        <div className="order-form">
+                            <div className="prev" onClick={() => navigate("/")}>
+                                <FontAwesomeIcon
+                                    className="arrow-icon"
+                                    icon={["fas", "arrow-left"]}
+                                ></FontAwesomeIcon>
+                                <span>Tiếp tục mua hàng</span>
+                            </div>
+                            <div className="next" onClick={() => navigate("/payment")}>
+                                <span>Thanh toán</span>
+                                <FontAwesomeIcon
+                                    className="arrow-icon"
+                                    icon={["fas", "arrow-right"]}
+                                ></FontAwesomeIcon>
+                            </div>
                         </div>
                     </>
                 ) : (

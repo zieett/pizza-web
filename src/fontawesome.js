@@ -13,9 +13,12 @@ import {
     faCircleRight,
     faArrowRight,
     faTrash,
+    faArrowLeft,
+    faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faYoutube } from "@fortawesome/free-brands-svg-icons";
 library.add(
+    faCheck,
     faTrash,
     faBox,
     faTruck,
@@ -29,6 +32,7 @@ library.add(
     faArrowRight,
     faFacebook,
     faInstagram,
-    faYoutube
+    faYoutube,
+    faArrowLeft
     // more icons go here
 );

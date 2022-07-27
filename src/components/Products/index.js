@@ -7,6 +7,8 @@ import "./custom.css";
 import { Context } from "../../context";
 const Products = ({ data }) => {
     const [showModal, setShowModal] = useState(false);
+    const [cartNum, setCartNum, cartData, setCartData] = useContext(Context);
+
     const handleModal = () => {
         setShowModal(!showModal);
     };
@@ -20,9 +22,9 @@ const Products = ({ data }) => {
         let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
         sessionStorage.setItem("cart", JSON.stringify([...cart, data]));
         handleCloseModal();
+        setCartData([...cart, data]);
         setCartNum(cartNum + 1);
     };
-    const [cartNum, setCartNum] = useContext(Context);
 
     return (
         <Wrapper>

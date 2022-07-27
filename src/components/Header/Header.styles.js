@@ -262,7 +262,7 @@ export const HeaderBot = styled.div`
             }
             .cart-mini-wrapper {
                 background-color: white;
-                padding: 20px 20px 50px 20px;
+                padding: 10px;
                 position: relative;
                 border-radius: 3px;
                 overflow-y: scroll;
@@ -278,10 +278,10 @@ export const HeaderBot = styled.div`
                     }
                 }
             }
-            .cart-mini-wrapper::before {
+            .cart-mini::before {
                 content: " ";
                 position: absolute;
-                bottom: 100%;
+                top: -12px;
                 left: auto;
                 right: 17px;
                 border: solid transparent;
@@ -289,7 +289,7 @@ export const HeaderBot = styled.div`
                 width: 0;
                 pointer-events: none;
                 border-color: rgba(255, 255, 255, 0);
-                border-bottom-color: #fff;
+                border-bottom-color: white;
                 border-width: 8px;
                 margin-left: -8px;
             }
@@ -300,7 +300,7 @@ export const HeaderBot = styled.div`
         .cart-item {
             border-bottom: 1px solid lightgray;
             margin: 10px auto;
-            padding: 10px;
+            padding: 10px 15px;
             width: 95%;
         }
         .cart-mini-wrapper-top {
@@ -338,6 +338,45 @@ export const HeaderBot = styled.div`
                         color: gray;
                     }
                 }
+            }
+        }
+        .cart-mini-wrapper-bot {
+            display: flex;
+            flex-direction: column;
+            padding: 5px 10px;
+            background-color: #f6f6f6;
+            border-radius: 0 0 3px 3px;
+            gap: 10px;
+
+            .total-price-wrapper {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                align-items: center;
+                .total-price {
+                    font-weight: bolder;
+                    color: #d50e15;
+                    font-size: 1.5rem;
+                }
+            }
+            .payment {
+                width: 100%;
+                background-color: #006a31;
+                height: 45px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+                span {
+                    text-align: center;
+                    color: white;
+                    vertical-align: center;
+                }
+            }
+            .payment:hover {
+                background-color: #d50e15;
             }
         }
     }

@@ -89,4 +89,47 @@ export const Content = styled.div`
             }
         }
     }
+    .total-price {
+        margin: 50px 5px;
+        text-align: right;
+        font-size: 1.5rem;
+        font-weight: bold;
+        span {
+            color: #d30e15;
+            font-weight: bolder;
+        }
+    }
+    .order-form {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        div + div {
+            margin-left: 30px;
+        }
+        div {
+            width: 250px;
+            background-color: #006a31;
+            padding: 15px 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            cursor: pointer;
+            justify-content: space-around;
+        }
+        div:hover {
+            span {
+                text-decoration: underline;
+            }
+        }
+        .arrow-icon {
+            color: white;
+        }
+        .prev {
+            background-color: #738c80;
+        }
+    }
 `;

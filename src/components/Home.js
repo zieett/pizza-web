@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import ProductMenu from "./ProductMenu";
 import ScrollToTop from "./ScrollToTop";
 import Cart from "./Cart";
+import PaymentProgress from "./PaymentProgress";
 const Home = () => {
     const [state, setState] = useState("");
     const [data, setData] = useState([]);
@@ -48,6 +49,7 @@ const Home = () => {
                         element={<ProductMenu data={data} loading={loading} />}
                     ></Route>
                     <Route path="/cart" element={<Cart></Cart>}></Route>
+                    <Route path="/payment" element={<PaymentProgress></PaymentProgress>}></Route>
                 </Routes>
                 <Footer></Footer>
             </div>
