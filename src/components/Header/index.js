@@ -22,8 +22,19 @@ const Header = () => {
         text: "Nhập địa chỉ của bạn",
         icon: "location-dot",
     });
-    const [cartNum, setCartNum, cartData, setCartData, cartDataGroup, setCartDataGroup] =
-        useContext(Context);
+    const a = useContext(Context);
+    const {
+        cartNum,
+        setCartNum,
+        cartData,
+        setCartData,
+        cartDataGroup,
+        setCartDataGroup,
+        setIsLogin,
+        isLogin,
+        user,
+        setUser,
+    } = useContext(Context);
     let active = useRef();
     let navigate = useNavigate();
     useEffect(() => {
@@ -46,6 +57,12 @@ const Header = () => {
         sessionStorage.setItem("cart", JSON.stringify(newData));
         setCartData(newData);
         setCartNum(cartNum - numberOfValue);
+    };
+    const handleLogOut = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setIsLogin(false);
+        alert("You've log out");
     };
     return (
         <Wrapper>
@@ -98,10 +115,26 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="login">
-                        <FontAwesomeIcon icon={["fas", "circle-user"]} />
-                        <span>Đăng nhập</span>
-                        <span>/</span>
-                        <span>Tạo tài khoản</span>
+                        {isLogin ? (
+                            <>
+                                <span>{user?.name}</span>
+                                <div className="log-out" onClick={handleLogOut}>
+                                    Log out
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                {" "}
+                                <FontAwesomeIcon icon={["fas", "circle-user"]} />
+                                <StyledLink to="/login" style={{ color: "black" }}>
+                                    <span>Đăng nhập</span>
+                                </StyledLink>
+                                <span>/</span>
+                                <StyledLink to="/register" style={{ color: "black" }}>
+                                    <span>Tạo tài khoản</span>
+                                </StyledLink>
+                            </>
+                        )}
                     </div>
                 </HeaderTop>
                 <HeaderBot>

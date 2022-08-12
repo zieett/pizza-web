@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const Wrapper = styled.div``;
 
 export const Content = styled.div`
+    .button {
+        display: ${(props) => (props.step2 === true ? "none" : "default")};
+    }
     width: var(--maxWidth);
     margin: 0 auto;
     .step1 {
@@ -13,7 +16,7 @@ export const Content = styled.div`
             background-color: #fff;
             padding: 16px;
             width: 100%;
-            /* height: 100%; */
+            /* height: fit-content; */
 
             .title {
                 font-size: 1.3rem;
@@ -30,16 +33,15 @@ export const Content = styled.div`
         .card-wrapper {
             position: relative;
             display: flex;
-            flex: 1 1 50%;
             align-items: center;
             cursor: pointer;
             img {
-                max-width: 100%;
-                max-height: 100%;
-                vertical-align: middle;
+                /* max-width: 100%; */
+                /* max-height: 100%; */
+                /* vertical-align: middle; */
             }
             .content {
-                width: 100%;
+                flex: 1;
                 margin-left: 15px;
             }
             .title {

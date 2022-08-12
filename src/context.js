@@ -11,9 +11,22 @@ const UserProvider = ({ children }) => {
     const [cartDataGroup, setCartDataGroup] = useState(
         Object.values(groupBy(cartData, "name")) || []
     );
+    const [isLogin, setIsLogin] = useState(localStorage.getItem("token") ? true : false);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     return (
         <Context.Provider
-            value={[cartNum, setCartNum, cartData, setCartData, cartDataGroup, setCartDataGroup]}
+            value={{
+                cartNum,
+                setCartNum,
+                cartData,
+                setCartData,
+                cartDataGroup,
+                setCartDataGroup,
+                isLogin,
+                setIsLogin,
+                user,
+                setUser,
+            }}
         >
             {children}
         </Context.Provider>

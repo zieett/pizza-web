@@ -10,6 +10,7 @@ import ProductMenu from "./ProductMenu";
 import ScrollToTop from "./ScrollToTop";
 import Cart from "./Cart";
 import PaymentProgress from "./PaymentProgress";
+import { LoginForm, RegisterForm } from "./Form";
 const Home = () => {
     const [state, setState] = useState("");
     const [data, setData] = useState([]);
@@ -50,6 +51,8 @@ const Home = () => {
                     ></Route>
                     <Route path="/cart" element={<Cart></Cart>}></Route>
                     <Route path="/payment" element={<PaymentProgress></PaymentProgress>}></Route>
+                    <Route path="/login" element={<LoginForm></LoginForm>}></Route>
+                    <Route path="/register" element={<RegisterForm></RegisterForm>}></Route>
                 </Routes>
                 <Footer></Footer>
             </div>

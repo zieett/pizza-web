@@ -23,7 +23,7 @@ const ProductsTotalPrice = ({ value }) => {
 };
 
 const Cart = () => {
-    const [cartNum, setCartNum, cartData, setCartData, cartDataGroup, setCartDataGroup] =
+    const { cartNum, setCartNum, cartData, setCartData, cartDataGroup, setCartDataGroup } =
         useContext(Context);
     const handlePlus = (value) => {
         sessionStorage.setItem("cart", JSON.stringify([...cartData, value]));

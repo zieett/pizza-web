@@ -7,7 +7,7 @@ import "./custom.css";
 import { Context } from "../../context";
 const Products = ({ data }) => {
     const [showModal, setShowModal] = useState(false);
-    const [cartNum, setCartNum, cartData, setCartData] = useContext(Context);
+    const { cartNum, setCartNum, cartData, setCartData } = useContext(Context);
 
     const handleModal = () => {
         setShowModal(!showModal);

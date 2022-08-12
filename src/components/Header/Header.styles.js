@@ -97,6 +97,9 @@ export const HeaderTop = styled.div`
     .login span {
         cursor: pointer;
     }
+    .log-out {
+        cursor: pointer;
+    }
 `;
 export const HeaderBot = styled.div`
     display: flex;

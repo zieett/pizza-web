@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import StepProgressBar from "react-step-progress";
 // import the stylesheet
 import { Wrapper, Content } from "./PaymentProgress.styles";
@@ -6,8 +6,10 @@ import "react-step-progress/dist/index.css";
 import hinhThuc1 from "../../images/hinhthuc_1.png";
 import hinhThuc2 from "../../images/hinhthuc_2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const step1Content = <h1>Step 1 Content</h1>;
-const step2Content = <h1>Step 2 Content</h1>;
+import { InformationForm, LoginForm } from "../Form";
+import styled from "styled-components";
+import { Context } from "../../context";
+
 const step3Content = <h1>Step 3 Content</h1>;
 
 const Step1Card = ({ image, content, title, active, ...property }) => {
@@ -45,6 +47,7 @@ const Step1Content = () => {
     );
 
     const [step1Active, setStep1Active] = useState(true);
+    console.log("step1");
 
     return (
         <div className="step1">
@@ -81,6 +84,9 @@ const Step1Content = () => {
         </div>
     );
 };
+function step1Validator() {
+    return true;
+}
 function step2Validator() {
     return true;
 }
@@ -88,13 +94,18 @@ function step2Validator() {
 function step3Validator() {
     return;
 }
+
 const PaymentProgress = () => {
+    const [step2, setStep2] = useState(false);
+    const { isLogin } = useContext(Context);
+    const [step, setStep] = useState(0);
     return (
         <Wrapper>
-            <Content>
+            <Content step2={step2}>
                 <StepProgressBar
-                    startingStep={0}
+                    startingStep={step}
                     stepClass="step-class"
+                    buttonWrapperClass="button"
                     progressClass="progress-class"
                     contentClass="content-class"
                     wrapperClass="bar-wrapper"
@@ -103,16 +114,23 @@ const PaymentProgress = () => {
                             label: "Hinh thức đặt hàng",
                             name: "step 1",
                             content: <Step1Content />,
+                            validator: () => {
+                                !isLogin ? setStep(step + 1) : setStep(step + 2);
+                                setStep2(true);
+                                return true;
+                            },
                         },
                         {
                             label: "Step 2",
-                            name: "step 2",
-                            content: step2Content,
-                            validator: step2Validator,
+                            name: "Thông tin đặt hàng",
+                            content: <InformationForm progress />,
+                            validator: () => {
+                                return true;
+                            },
                         },
                         {
                             label: "Step 3",
-                            name: "step 3",
+                            name: "Thông tin thanh toán",
                             content: step3Content,
                             validator: step3Validator,
                         },
