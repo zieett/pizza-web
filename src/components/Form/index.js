@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../../context.js";
 import { Content, Wrapper } from "./Form.styles";
 import { useForm } from "react-hook-form";
+import ReactLoading from "react-loading";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { convertMoney } from "../../helpers.js";
 import emailjs from "@emailjs/browser";
-const domainName = "http://ec2-18-208-109-226.compute-1.amazonaws.com/:3001";
+const domainName = "http://ec2-18-208-109-226.compute-1.amazonaws.com:3001";
 const registerSchema = yup.object({
     firstName: yup.string().required("Tên bắt buộc nhập"),
     lastName: yup.string().required("Tên bắt buộc nhập"),
@@ -77,13 +79,22 @@ const InformationForm = ({ progress }) => {
                 setCartData([]);
                 setCartNum(0);
                 navigate("/");
+                setLoading(false);
             })
             .catch((err) => console.log(err));
     };
     return (
         <Wrapper {...(progress && { style: { marginTop: 0 } })}>
             <Content>
-                {!loading && (
+                {loading ? (
+                    <div style={{ width: "100%" }}>
+                        <ReactLoading
+                            type="spin"
+                            color="black"
+                            style={{ width: "150px", margin: "0 auto" }}
+                        />
+                    </div>
+                ) : (
                     <form className="form-container container" onSubmit={handleSubmit(submitForm)}>
                         <div className="top">
                             <h1>Đặt giao hàng</h1>
