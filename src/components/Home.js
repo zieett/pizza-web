@@ -12,13 +12,14 @@ import Cart from "./Cart";
 import PaymentProgress from "./PaymentProgress";
 import { LoginForm, RegisterForm } from "./Form";
 const Home = () => {
+    let domainName = "http://ec2-3-93-13-118.compute-1.amazonaws.com:3001";
     const [state, setState] = useState("");
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     console.log("home");
     const fetchData = async () => {
         await axios
-            .get("http://localhost:3001/products", {
+            .get(`/products`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                 },

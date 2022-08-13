@@ -8,7 +8,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { convertMoney } from "../../helpers.js";
 import emailjs from "@emailjs/browser";
-const domainName = "http://localhost:3001";
+const domainName = "http://ec2-3-93-13-118.compute-1.amazonaws.com:3001";
 const registerSchema = yup.object({
     firstName: yup.string().required("Tên bắt buộc nhập"),
     lastName: yup.string().required("Tên bắt buộc nhập"),
@@ -61,12 +61,12 @@ const InformationForm = ({ progress }) => {
         console.log(123);
         let totalPrice = convertMoney(cartData.reduce((total, value) => total + value.price, 0));
         await axios
-            .post(`${domainName}/sendPayment`, { data, totalPrice })
+            .post(`/sendPayment`, { data, totalPrice })
             .then((res) => {})
             .catch((err) => console.log(err));
 
         await axios
-            .post(`${domainName}/sendSMS`, {
+            .post(`/sendSMS`, {
                 totalPrice: totalPrice,
                 name: data.name,
             })
@@ -217,7 +217,7 @@ const LoginForm = ({ progress }) => {
     });
     const submitForm = (data) => {
         axios
-            .post(`${domainName}/login`, {
+            .post(`/login`, {
                 userName: data.email,
                 password: data.password,
             })
@@ -280,7 +280,7 @@ const RegisterForm = () => {
     const submitForm = async (data) => {
         await axios
             .post(
-                `${domainName}/register`,
+                `/register`,
                 {
                     userName: data.email,
                     password: data.password,
