@@ -8,7 +8,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { convertMoney } from "../../helpers.js";
 import emailjs from "@emailjs/browser";
-const domainName = "http://ec2-3-93-13-118.compute-1.amazonaws.com:3001";
+const domainName = "http://ec2-44-203-173-62.compute-1.amazonaws.com:3001";
 const registerSchema = yup.object({
     firstName: yup.string().required("Tên bắt buộc nhập"),
     lastName: yup.string().required("Tên bắt buộc nhập"),
