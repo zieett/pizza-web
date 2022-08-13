@@ -61,12 +61,12 @@ const InformationForm = ({ progress }) => {
         console.log(123);
         let totalPrice = convertMoney(cartData.reduce((total, value) => total + value.price, 0));
         await axios
-            .post(`/sendPayment`, { data, totalPrice })
+            .post(`${domainName}/sendPayment`, { data, totalPrice })
             .then((res) => {})
             .catch((err) => console.log(err));
 
         await axios
-            .post(`/sendSMS`, {
+            .post(`${domainName}/sendSMS`, {
                 totalPrice: totalPrice,
                 name: data.name,
             })
@@ -217,7 +217,7 @@ const LoginForm = ({ progress }) => {
     });
     const submitForm = (data) => {
         axios
-            .post(`/login`, {
+            .post(`${domainName}/login`, {
                 userName: data.email,
                 password: data.password,
             })
@@ -280,7 +280,7 @@ const RegisterForm = () => {
     const submitForm = async (data) => {
         await axios
             .post(
-                `/register`,
+                `${domainName}/register`,
                 {
                     userName: data.email,
                     password: data.password,

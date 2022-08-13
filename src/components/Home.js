@@ -19,7 +19,7 @@ const Home = () => {
     console.log("home");
     const fetchData = async () => {
         await axios
-            .get(`/products`, {
+            .get(`${domainName}/products`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                 },
