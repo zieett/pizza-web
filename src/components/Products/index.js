@@ -25,7 +25,7 @@ const Products = ({ data }) => {
         setCartData([...cart, data]);
         setCartNum(cartNum + 1);
     };
-
+    console.log(data);
     return (
         <Wrapper>
             <div>

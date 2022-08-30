@@ -8,6 +8,7 @@ import axios from "axios";
 import Sliders from "../Slider";
 
 const Body = ({ data, loading }) => {
+    console.log(data);
     return (
         <>
             <Sliders></Sliders>
