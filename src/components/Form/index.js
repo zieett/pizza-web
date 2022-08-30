@@ -10,7 +10,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { convertMoney } from "../../helpers.js";
 import emailjs from "@emailjs/browser";
-const domainName = "http://ec2-18-208-109-226.compute-1.amazonaws.com:3001";
+const domainName = "https://pizza-server-heroku.herokuapp.com";
 const registerSchema = yup.object({
     firstName: yup.string().required("Tên bắt buộc nhập"),
     lastName: yup.string().required("Tên bắt buộc nhập"),

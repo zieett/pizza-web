@@ -12,7 +12,7 @@ import Cart from "./Cart";
 import PaymentProgress from "./PaymentProgress";
 import { LoginForm, RegisterForm } from "./Form";
 const Home = () => {
-    let domainName = "http://ec2-18-208-109-226.compute-1.amazonaws.com:3001";
+    let domainName = "https://pizza-server-heroku.herokuapp.com";
     const [state, setState] = useState("");
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
