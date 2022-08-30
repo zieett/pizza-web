@@ -2,7 +2,6 @@
     "name": "pizza-app",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://ec2-3-93-13-118.compute-1.amazonaws.com:3001",
     "dependencies": {
         "@emailjs/browser": "^3.6.2",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
